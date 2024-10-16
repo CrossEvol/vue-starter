@@ -1,20 +1,21 @@
 import { swaggerUI } from '@hono/swagger-ui'
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi'
+import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
-import { getUsersWithProject } from './database'
-import {
-    ProjectSchema,
-    UserSchema,
-    TaskSchema,
-    UserWithProjectsSchema,
-} from './zod.type'
 import {
     createTask,
+    deleteTask,
     getAllTasks,
     getTaskById,
+    getUsersWithProject,
     updateTask,
-    deleteTask,
 } from './database'
+import {
+    ProjectSchema,
+    TaskSchema,
+    UserSchema,
+    UserWithProjectsSchema,
+} from './zod.type'
 
 const app = new OpenAPIHono()
 
@@ -24,6 +25,7 @@ app.openAPIRegistry.register('Task', TaskSchema)
 app.openAPIRegistry.register('UserWithProjects', UserWithProjectsSchema)
 
 app.use(logger())
+app.use(cors())
 
 app.openapi(
     createRoute({
@@ -101,7 +103,7 @@ app.openapi(
             body: {
                 content: {
                     'application/json': {
-                        schema: TaskSchema.omit({ id: true, createdAt: true }),
+                        schema: TaskSchema.pick({ text: true }),
                     },
                 },
             },

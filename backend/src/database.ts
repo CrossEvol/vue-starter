@@ -30,9 +30,7 @@ export const getUsersWithProject = async () => {
     return Object.values(result)
 }
 
-export const createTask = async (
-    task: Omit<Task, 'id' | 'createdAt' | 'done'>,
-) => {
+export const createTask = async (task: Pick<Task, 'text'>) => {
     return db
         .insert(tasks)
         .values({ text: task.text, done: false, createdAt: new Date() })
@@ -52,7 +50,13 @@ export const updateTask = async (
     id: number,
     task: Partial<Omit<Task, 'id' | 'createdAt'>>,
 ) => {
-    return db.update(tasks).set(task).where(eq(tasks.id, id)).returning().get()
+    const { text, done } = task
+    return db
+        .update(tasks)
+        .set({ text, done })
+        .where(eq(tasks.id, id))
+        .returning()
+        .get()
 }
 
 export const deleteTask = async (id: number) => {
