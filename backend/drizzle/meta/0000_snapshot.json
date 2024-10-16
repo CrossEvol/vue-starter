@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "e41b0769-9d9e-4bb0-b2e3-3d6098f868a4",
+  "id": "67902f9a-feb1-4b3f-b2f7-ec2979bcb412",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "project": {
@@ -18,7 +18,7 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "owner_id": {
@@ -62,14 +62,14 @@
           "name": "text",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "done": {
           "name": "done",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "created_at": {
@@ -100,7 +100,7 @@
           "name": "full_name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
