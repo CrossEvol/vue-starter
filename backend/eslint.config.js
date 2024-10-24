@@ -1,8 +1,8 @@
-import globals from 'globals'
 import pluginJs from '@eslint/js'
-import tseslint from 'typescript-eslint'
 import prettierConfig from 'eslint-config-prettier'
 import prettierPlugin from 'eslint-plugin-prettier'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
 export default [
     {
@@ -28,6 +28,13 @@ export default [
                     destructuredArrayIgnorePattern: '^_',
                     varsIgnorePattern: '^_',
                     ignoreRestSiblings: true,
+                },
+            ],
+            '@typescript-eslint/no-empty-object-type': [
+                'error',
+                {
+                    allowInterfaces: 'always',
+                    allowObjectTypes: 'always',
                 },
             ],
             'prettier/prettier': [
