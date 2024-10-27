@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Task from '../components/Task.vue'
-import SignIn from '../views/SignInView.vue'
+import SignInView from '../views/SignInView.vue'
+import TaskView from '../views/TaskView.vue'
 
 const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Task,
+        component: TaskView,
     },
     {
         path: '/sign-in',
         name: 'SignIn',
         // Lazy loading example
-        component: SignIn,
+        component: SignInView,
     },
 ]
 

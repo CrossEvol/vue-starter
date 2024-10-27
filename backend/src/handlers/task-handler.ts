@@ -15,6 +15,7 @@ function useTaskRoute(app: HonoApp) {
         createRoute({
             method: 'post',
             path: '/tasks',
+            tags: ['Task'],
             request: {
                 body: {
                     content: {
@@ -47,6 +48,7 @@ function useTaskRoute(app: HonoApp) {
         createRoute({
             method: 'get',
             path: '/tasks',
+            tags: ['Task'],
             responses: {
                 200: {
                     description: 'Get all tasks',
@@ -69,6 +71,7 @@ function useTaskRoute(app: HonoApp) {
         createRoute({
             method: 'get',
             path: '/tasks/:id',
+            tags: ['Task'],
             request: {
                 params: z.object({
                     id: z.string().transform((val) => parseInt(val, 10)),
@@ -103,6 +106,7 @@ function useTaskRoute(app: HonoApp) {
         createRoute({
             method: 'put',
             path: '/tasks/:id',
+            tags: ['Task'],
             request: {
                 params: z.object({
                     id: z.string().transform((val) => parseInt(val, 10)),
@@ -148,6 +152,7 @@ function useTaskRoute(app: HonoApp) {
         createRoute({
             method: 'delete',
             path: '/tasks/:id',
+            tags: ['Task'],
             request: {
                 params: z.object({
                     id: z.string().transform((val) => parseInt(val, 10)),

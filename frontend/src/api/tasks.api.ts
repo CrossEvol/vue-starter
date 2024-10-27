@@ -1,7 +1,6 @@
-import { httpClient } from '../utils/fetch.client'
 import { Task } from '../models'
-
-const BASE_URL = 'http://localhost:3000'
+import { httpClient } from '../utils/fetch.client'
+import { BASE_URL } from './base'
 
 export const tasksApi = {
     getAllTasks: async () => {

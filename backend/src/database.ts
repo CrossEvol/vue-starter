@@ -84,16 +84,22 @@ export const createSession = async (userId: number, token: string) => {
     const expiresAt = new Date()
     expiresAt.setDate(expiresAt.getDate() + 7) // 7 days from now
 
-    return db
-        .insert(sessions)
-        .values({
-            userId,
-            token,
-            expiresAt,
-            createdAt: new Date(),
-        })
-        .returning()
-        .get()
+    return sqlite.transaction(() => {
+        // Delete all previous sessions for this user
+        db.delete(sessions).where(eq(sessions.userId, userId)).run()
+
+        // Create new session
+        return db
+            .insert(sessions)
+            .values({
+                userId,
+                token,
+                expiresAt,
+                createdAt: new Date(),
+            })
+            .returning()
+            .get()
+    })()
 }
 
 export const getValidSession = async (userID: number) => {
@@ -107,4 +113,12 @@ export const getValidSession = async (userID: number) => {
             ),
         )
         .get()
+}
+
+export const deleteUserSessions = async (userId: number) => {
+    return db
+        .delete(sessions)
+        .where(eq(sessions.userId, userId))
+        .returning()
+        .run()
 }

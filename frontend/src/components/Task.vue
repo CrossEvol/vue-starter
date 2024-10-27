@@ -23,7 +23,7 @@ const searchTasks = () => {
   <div class="min-h-screen bg-gray-900 flex flex-col items-center pt-16 px-4">
     <h1 class="text-2xl font-bold text-white mb-8">Sample Todo app using Vue</h1>
 
-    <div class="w-full max-w-md">
+    <div class="w-full max-w-lg">
       <div class="flex mb-4">
         <input v-model="taskStore.newTask" @keyup.enter="taskStore.addTask" type="text"
           placeholder="Type an item to add" class="flex-grow px-4 py-2 rounded-l-lg focus:outline-none" />

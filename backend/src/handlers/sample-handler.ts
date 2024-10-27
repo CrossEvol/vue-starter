@@ -6,6 +6,7 @@ function useSampleRoute(app: HonoApp) {
         createRoute({
             method: 'get',
             path: '/api/page',
+            tags: ['Sample'],
             security: [
                 {
                     Bearer: [], // <- Add security name (must be same)
@@ -36,6 +37,7 @@ function useSampleRoute(app: HonoApp) {
         createRoute({
             method: 'get',
             path: '/hello',
+            tags: ['Sample'],
             responses: {
                 200: {
                     description: 'Respond a message',

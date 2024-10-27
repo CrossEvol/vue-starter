@@ -5,6 +5,7 @@ import {
     getUserByEmail,
     getUsers,
     verifyPassword,
+    deleteUserSessions,
 } from '../database'
 import { createJWT } from '../utils/jwt.util'
 import { UserProfileSchema } from '../zod.type'
@@ -14,6 +15,7 @@ function useUserRoute(app: HonoApp) {
         createRoute({
             method: 'get',
             path: '/users',
+            tags: ['User'],
             responses: {
                 200: {
                     description: 'Get all users',
@@ -42,6 +44,7 @@ function useUserRoute(app: HonoApp) {
         createRoute({
             method: 'post',
             path: '/auth/login',
+            tags: ['User'],
             request: {
                 body: {
                     content: {
@@ -103,6 +106,7 @@ function useUserRoute(app: HonoApp) {
         createRoute({
             method: 'get',
             path: '/api/profile',
+            tags: ['User'],
             security: [
                 {
                     Bearer: [],
@@ -135,6 +139,50 @@ function useUserRoute(app: HonoApp) {
                 return c.json({ message: 'Unauthorized' }, 401)
             }
             return c.json({ ...user, password: undefined }, 200)
+        },
+    )
+
+    app.openapi(
+        createRoute({
+            method: 'post',
+            path: '/api/logout',
+            tags: ['User'],
+            security: [
+                {
+                    Bearer: [],
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'Logout successful',
+                    content: {
+                        'application/json': {
+                            schema: z.object({
+                                message: z.string(),
+                            }),
+                        },
+                    },
+                },
+                401: {
+                    description: 'Unauthorized',
+                    content: {
+                        'application/json': {
+                            schema: z.object({
+                                message: z.string(),
+                            }),
+                        },
+                    },
+                },
+            },
+        }),
+        async (c) => {
+            const user = c.get('user')
+            if (!user) {
+                return c.json({ message: 'Unauthorized' }, 401)
+            }
+
+            await deleteUserSessions(user.id)
+            return c.json({ message: 'Logged out successfully' }, 200)
         },
     )
 }

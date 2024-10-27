@@ -1,41 +1,4 @@
 export interface paths {
-    '/hello': {
-        parameters: {
-            query?: never
-            header?: never
-            path?: never
-            cookie?: never
-        }
-        get: {
-            parameters: {
-                query?: never
-                header?: never
-                path?: never
-                cookie?: never
-            }
-            requestBody?: never
-            responses: {
-                /** @description Respond a message */
-                200: {
-                    headers: {
-                        [name: string]: unknown
-                    }
-                    content: {
-                        'application/json': {
-                            message: string
-                        }
-                    }
-                }
-            }
-        }
-        put?: never
-        post?: never
-        delete?: never
-        options?: never
-        head?: never
-        patch?: never
-        trace?: never
-    }
     '/users': {
         parameters: {
             query?: never
@@ -52,7 +15,7 @@ export interface paths {
             }
             requestBody?: never
             responses: {
-                /** @description Create new User with Project */
+                /** @description Get all users */
                 200: {
                     headers: {
                         [name: string]: unknown
@@ -61,13 +24,117 @@ export interface paths {
                         'application/json': {
                             data: {
                                 id: number
-                                fullName: string
-                                projects: {
-                                    id: number
-                                    name: string
-                                    ownerId: number
-                                }[]
+                                email: string
+                                name: string
+                                createdAt: string
                             }[]
+                        }
+                    }
+                }
+            }
+        }
+        put?: never
+        post?: never
+        delete?: never
+        options?: never
+        head?: never
+        patch?: never
+        trace?: never
+    }
+    '/auth/login': {
+        parameters: {
+            query?: never
+            header?: never
+            path?: never
+            cookie?: never
+        }
+        get?: never
+        put?: never
+        post: {
+            parameters: {
+                query?: never
+                header?: never
+                path?: never
+                cookie?: never
+            }
+            requestBody?: {
+                content: {
+                    'application/json': {
+                        /** Format: email */
+                        email: string
+                        password: string
+                    }
+                }
+            }
+            responses: {
+                /** @description Login successful */
+                200: {
+                    headers: {
+                        [name: string]: unknown
+                    }
+                    content: {
+                        'application/json': {
+                            access_token: string
+                        }
+                    }
+                }
+                /** @description Invalid credentials */
+                401: {
+                    headers: {
+                        [name: string]: unknown
+                    }
+                    content: {
+                        'application/json': {
+                            error: string
+                        }
+                    }
+                }
+            }
+        }
+        delete?: never
+        options?: never
+        head?: never
+        patch?: never
+        trace?: never
+    }
+    '/api/profile': {
+        parameters: {
+            query?: never
+            header?: never
+            path?: never
+            cookie?: never
+        }
+        get: {
+            parameters: {
+                query?: never
+                header?: never
+                path?: never
+                cookie?: never
+            }
+            requestBody?: never
+            responses: {
+                /** @description Returns user profile */
+                200: {
+                    headers: {
+                        [name: string]: unknown
+                    }
+                    content: {
+                        'application/json': {
+                            id: number
+                            email: string
+                            name: string
+                            createdAt: string
+                        }
+                    }
+                }
+                /** @description Unauthorized */
+                401: {
+                    headers: {
+                        [name: string]: unknown
+                    }
+                    content: {
+                        'application/json': {
+                            message: string
                         }
                     }
                 }
@@ -126,7 +193,6 @@ export interface paths {
                 content: {
                     'application/json': {
                         text: string
-                        done: boolean
                     }
                 }
             }
@@ -279,18 +345,96 @@ export interface paths {
         patch?: never
         trace?: never
     }
+    '/api/page': {
+        parameters: {
+            query?: never
+            header?: never
+            path?: never
+            cookie?: never
+        }
+        get: {
+            parameters: {
+                query?: never
+                header?: never
+                path?: never
+                cookie?: never
+            }
+            requestBody?: never
+            responses: {
+                /** @description Authorization success message */
+                200: {
+                    headers: {
+                        [name: string]: unknown
+                    }
+                    content: {
+                        'application/json': {
+                            message: string
+                        }
+                    }
+                }
+            }
+        }
+        put?: never
+        post?: never
+        delete?: never
+        options?: never
+        head?: never
+        patch?: never
+        trace?: never
+    }
+    '/hello': {
+        parameters: {
+            query?: never
+            header?: never
+            path?: never
+            cookie?: never
+        }
+        get: {
+            parameters: {
+                query?: never
+                header?: never
+                path?: never
+                cookie?: never
+            }
+            requestBody?: never
+            responses: {
+                /** @description Respond a message */
+                200: {
+                    headers: {
+                        [name: string]: unknown
+                    }
+                    content: {
+                        'application/json': {
+                            message: string
+                        }
+                    }
+                }
+            }
+        }
+        put?: never
+        post?: never
+        delete?: never
+        options?: never
+        head?: never
+        patch?: never
+        trace?: never
+    }
 }
 export type webhooks = Record<string, never>
 export interface components {
     schemas: {
         User: {
             id: number
-            fullName: string
-        }
-        Project: {
-            id: number
+            email: string
+            password: string
             name: string
-            ownerId: number
+            createdAt: string
+        }
+        UserProfile: {
+            id: number
+            email: string
+            name: string
+            createdAt: string
         }
         Task: {
             id: number
@@ -299,14 +443,12 @@ export interface components {
             /** @description z-date-time */
             createdAt: Date
         }
-        UserWithProjects: {
+        Session: {
             id: number
-            fullName: string
-            projects: {
-                id: number
-                name: string
-                ownerId: number
-            }[]
+            userId: number
+            token: string
+            expiresAt: string
+            createdAt: string
         }
     }
     responses: never

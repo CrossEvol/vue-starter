@@ -9,12 +9,18 @@ import useSampleRoute from './handlers/sample-handler'
 import useTaskRoute from './handlers/task-handler'
 import useUserRoute from './handlers/user-handler'
 import { getFromJWT } from './utils/jwt.util'
-import { SessionSchema, TaskSchema, UserSchema } from './zod.type'
+import {
+    SessionSchema,
+    TaskSchema,
+    UserProfileSchema,
+    UserSchema,
+} from './zod.type'
 
 const app = new OpenAPIHono<IEnv, {}, '/'>()
 
 /* bind models */
 app.openAPIRegistry.register('User', UserSchema)
+app.openAPIRegistry.register('UserProfile', UserProfileSchema)
 app.openAPIRegistry.register('Task', TaskSchema)
 app.openAPIRegistry.register('Session', SessionSchema)
 
