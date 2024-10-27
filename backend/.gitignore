@@ -29,3 +29,7 @@ lerna-debug.log*
 
 # tmp
 sqlite.db
+
+# Generated
+private.key
+public.pem

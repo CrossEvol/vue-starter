@@ -3,10 +3,14 @@ import * as z from 'zod'
 export const UserSchema = z.object({
     id: z.number(),
     email: z.string(),
+    password: z.string(),
     name: z.string(),
     createdAt: z.date(),
 })
 export type User = z.infer<typeof UserSchema>
+
+export const UserProfileSchema = UserSchema.omit({ password: true })
+export type UserProfile = z.infer<typeof UserProfileSchema>
 
 export const SessionSchema = z.object({
     id: z.number(),

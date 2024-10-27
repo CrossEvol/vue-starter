@@ -1,4 +1,6 @@
 import { OpenAPIHono } from '@hono/zod-openapi'
-import { Env } from 'hono/types'
+import { User } from './zod.type'
 
-export type HonoApp = OpenAPIHono<Env, {}, '/'>
+export type IEnv = { Variables: { user: User } }
+
+export type HonoApp = OpenAPIHono<IEnv, {}, '/'>
