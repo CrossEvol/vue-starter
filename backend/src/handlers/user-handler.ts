@@ -1,7 +1,7 @@
 import { createRoute, z } from '@hono/zod-openapi'
 import { HonoApp } from '../app.type'
-import { ProjectSchema, UserSchema } from '../zod.type'
-import { getUsersWithProject } from '../database'
+import { UserSchema } from '../zod.type'
+import { getUsers } from '../database'
 
 function useUserRoute(app: HonoApp) {
     app.openapi(
@@ -10,15 +10,11 @@ function useUserRoute(app: HonoApp) {
             path: '/users',
             responses: {
                 200: {
-                    description: 'Create new User with Project',
+                    description: 'Get all users',
                     content: {
                         'application/json': {
                             schema: z.object({
-                                data: z.array(
-                                    UserSchema.extend({
-                                        projects: z.array(ProjectSchema),
-                                    }),
-                                ),
+                                data: z.array(UserSchema),
                             }),
                         },
                     },
@@ -26,8 +22,7 @@ function useUserRoute(app: HonoApp) {
             },
         }),
         async (c) => {
-            const res = await getUsersWithProject()
-
+            const res = await getUsers()
             return c.json({ data: res })
         },
     )

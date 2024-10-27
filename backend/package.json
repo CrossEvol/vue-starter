@@ -4,11 +4,13 @@
     "scripts": {
         "dev": "tsx watch src/index.ts",
         "lint": "eslint . --max-warnings=10",
+        "prettier":"npx prettier . --write",
         "test": "vitest . ",
-        "generate": "drizzle-kit generate",
-        "migrate": "tsx migrate.ts",
-        "seed": "tsx seed.ts",
-        "studio": "drizzle-kit studio"
+        "db:gen": "drizzle-kit generate",
+        "db:genc": "drizzle-kit generate --custom",
+        "db:migrate": "tsx migrate.ts",
+        "db:seed": "tsx seed.ts",
+        "db:studio": "drizzle-kit studio"
     },
     "dependencies": {
         "@hono/node-server": "^1.13.2",

@@ -2,22 +2,20 @@ import * as z from 'zod'
 
 export const UserSchema = z.object({
     id: z.number(),
-    fullName: z.string(),
-})
-export type Users = z.infer<typeof UserSchema>
-
-export const ProjectSchema = z.object({
-    id: z.number(),
+    email: z.string(),
     name: z.string(),
-    ownerId: z.number(),
+    createdAt: z.date(),
 })
-export type Projects = z.infer<typeof ProjectSchema>
+export type User = z.infer<typeof UserSchema>
 
-export const UserWithProjectsSchema = UserSchema.extend({
-    projects: z.array(ProjectSchema),
+export const SessionSchema = z.object({
+    id: z.number(),
+    userId: z.number(),
+    token: z.string(),
+    expiresAt: z.date(),
+    createdAt: z.date(),
 })
-
-export type UserWithProjects = z.infer<typeof UserWithProjectsSchema>
+export type Session = z.infer<typeof SessionSchema>
 
 export const TaskSchema = z.object({
     id: z.number(),
@@ -25,5 +23,4 @@ export const TaskSchema = z.object({
     done: z.boolean(),
     createdAt: z.date({ description: 'z-date-time' }),
 })
-
 export type Task = z.infer<typeof TaskSchema>

@@ -3,3 +3,10 @@ build
 coverage
 .next
 node_modules
+drizzle
+.prettierginore
+README.md
+tsconfig.json
+.prettierrc
+package.json
+pnpm-lock.yaml

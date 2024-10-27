@@ -6,4 +6,8 @@ const sqlite = new Database('sqlite.db')
 const db = drizzle(sqlite, { logger: true })
 
 // this will automatically run needed migrations on the database
+/* 
+https://orm.drizzle.team/docs/migrations
+https://orm.drizzle.team/docs/kit-overview
+*/
 migrate(db, { migrationsFolder: './drizzle' })

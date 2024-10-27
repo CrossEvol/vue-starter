@@ -8,6 +8,41 @@
       "when": 1729002557573,
       "tag": "0000_minor_leader",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1730026701330,
+      "tag": "0001_talented_vargas",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1730027015547,
+      "tag": "0002_update-users",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1730027961226,
+      "tag": "0003_melodic_slapstick",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1730029959220,
+      "tag": "0004_make-email-unique ",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1730030256270,
+      "tag": "0005_amusing_toxin",
+      "breakpoints": true
     }
   ]
 }
