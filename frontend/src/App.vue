@@ -1,9 +1,23 @@
 <script setup lang="ts">
-import Task from './components/Task.vue'
+// Your imports here
 </script>
 
 <template>
-  <Task />
+  <router-view />
 </template>
 
-<style scoped></style>
+<style scoped>
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
